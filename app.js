@@ -7,6 +7,9 @@ class MusicApp {
         this.tracks = []; // Metadata cache
         this.currentTrackIndex = -1;
         this.isPlaying = false;
+        this.isPro = false;
+        this.maxFreeTracks = 10;
+        this.proKey = 'DEMOPRO2025';
 
         // UI Elements
         this.elements = {
@@ -25,7 +28,13 @@ class MusicApp {
             trackTitle: document.getElementById('track-title'),
             trackCount: document.getElementById('track-count'),
             toast: document.getElementById('toast'),
-            albumArt: document.getElementById('album-art')
+            albumArt: document.getElementById('album-art'),
+            upgradeBtn: document.getElementById('upgrade-btn'),
+            proBadge: document.getElementById('pro-badge'),
+            upgradeModal: document.getElementById('upgrade-modal'),
+            closeModal: document.querySelector('.close-modal'),
+            activationInput: document.getElementById('activation-code'),
+            activateBtn: document.getElementById('activate-btn')
         };
 
         this.init();
@@ -34,6 +43,7 @@ class MusicApp {
     async init() {
         try {
             await this.initDB();
+            this.checkProStatus();
             this.setupEventListeners();
             await this.loadPlaylist();
         } catch (error) {
@@ -79,18 +89,77 @@ class MusicApp {
             this.elements.duration.textContent = this.formatTime(this.audio.duration);
         });
 
-        // Progress Bar
         this.elements.progressContainer.addEventListener('click', (e) => {
             const width = this.elements.progressContainer.clientWidth;
             const clickX = e.offsetX;
             const duration = this.audio.duration;
             this.audio.currentTime = (clickX / width) * duration;
         });
+
+        // Pro Mode & Modal
+        this.elements.upgradeBtn.addEventListener('click', () => this.elements.upgradeModal.classList.remove('hidden'));
+        this.elements.closeModal.addEventListener('click', () => this.elements.upgradeModal.classList.add('hidden'));
+        this.elements.upgradeModal.addEventListener('click', (e) => {
+            if (e.target === this.elements.upgradeModal) this.elements.upgradeModal.classList.add('hidden');
+        });
+
+        this.elements.activateBtn.addEventListener('click', () => this.activatePro(this.elements.activationInput.value));
+    }
+
+    checkProStatus() {
+        // Check Local Storage
+        const storedPro = localStorage.getItem('isPro');
+        if (storedPro === 'true') {
+            this.isPro = true;
+        }
+
+        // Check URL Params
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+        if (key === this.proKey) {
+            this.activatePro(key, true);
+        }
+
+        this.updateProUI();
+    }
+
+    activatePro(code, fromUrl = false) {
+        if (code === this.proKey) {
+            this.isPro = true;
+            localStorage.setItem('isPro', 'true');
+            this.updateProUI();
+            this.elements.upgradeModal.classList.add('hidden');
+            this.showToast('¡Modo Pro Activado! 🏆');
+
+            // Clean URL if from URL
+            if (fromUrl) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        } else {
+            this.showToast('Código inválido ❌');
+        }
+    }
+
+    updateProUI() {
+        if (this.isPro) {
+            this.elements.upgradeBtn.classList.add('hidden');
+            this.elements.proBadge.classList.remove('hidden');
+        } else {
+            this.elements.upgradeBtn.classList.remove('hidden');
+            this.elements.proBadge.classList.add('hidden');
+        }
     }
 
     async handleFileUpload(event) {
         const files = event.target.files;
         if (!files.length) return;
+
+        // Check Limit
+        if (!this.isPro && (this.tracks.length + files.length) > this.maxFreeTracks) {
+            this.elements.upgradeModal.classList.remove('hidden');
+            this.showToast(`Límite de ${this.maxFreeTracks} canciones gratuitas alcanzado`);
+            return;
+        }
 
         let addedCount = 0;
         for (const file of files) {

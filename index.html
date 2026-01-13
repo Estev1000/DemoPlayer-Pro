@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +11,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 </head>
+
 <body>
     <div class="app-container">
         <header class="header">
             <h1>DemoPlayer</h1>
             <button id="upload-btn" class="icon-btn" aria-label="Cargar Música">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
             </button>
             <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
         </header>
@@ -44,14 +52,31 @@
 
             <div class="controls">
                 <button id="prev-btn" class="control-btn" aria-label="Anterior">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="19 20 9 12 19 4 19 20" />
+                        <line x1="5" y1="19" x2="5" y2="5" />
+                    </svg>
                 </button>
                 <button id="play-btn" class="play-btn" aria-label="Reproducir">
-                    <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="6" y="4" width="4" height="16" />
+                        <rect x="14" y="4" width="4" height="16" />
+                    </svg>
                 </button>
                 <button id="next-btn" class="control-btn" aria-label="Siguiente">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 4 15 12 5 20 5 4" />
+                        <line x1="19" y1="5" x2="19" y2="19" />
+                    </svg>
                 </button>
             </div>
         </main>
@@ -59,7 +84,11 @@
         <section class="playlist-section">
             <div class="playlist-header">
                 <h3>Mis Demos</h3>
-                <span id="track-count">0 temas</span>
+                <div class="header-controls">
+                    <span id="track-count">0 temas</span>
+                    <button id="upgrade-btn" class="upgrade-btn hidden">💎 Premium</button>
+                    <span id="pro-badge" class="pro-badge hidden">🏆 PRO</span>
+                </div>
             </div>
             <ul id="playlist" class="playlist">
                 <!-- Tracks will be injected here -->
@@ -67,9 +96,38 @@
         </section>
     </div>
 
+    <!-- Upgrade Modal -->
+    <div id="upgrade-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>🔓 Activar Modo Pro</h2>
+            <p>La versión gratuita permite hasta <strong>10 canciones</strong>.</p>
+            <p>Para almacenamiento ilimitado, activa el Modo Pro.</p>
+            <p class="pro-price">$5.000 pesos por mes</p>
+
+            <a href="https://mpago.la/27j868h" target="_blank" class="mp-btn">
+                Pagar con Mercado Pago
+            </a>
+
+            <div class="manual-activation">
+                <h3>Tengo un código</h3>
+                <div class="input-group">
+                    <input type="text" id="activation-code" placeholder="Ingresa tu código aquí">
+                    <button id="activate-btn">Activar</button>
+                </div>
+            </div>
+
+            <div class="support-info">
+                <p>📞 Soporte Técnico (Cesar Luis Mansilla):</p>
+                <a href="https://wa.me/5492657708115" target="_blank">+54 9 2657 708115</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Notification Toast -->
     <div id="toast" class="toast hidden">Mensaje</div>
 
     <script src="app.js"></script>
 </body>
+
 </html>
