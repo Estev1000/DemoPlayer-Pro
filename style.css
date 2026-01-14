@@ -432,9 +432,9 @@ body {
 
 .modal-content {
     background: var(--surface-color);
-    width: 100%;
+    width: 90%;
     max-width: 400px;
-    padding: 30px;
+    padding: 24px;
     border-radius: 24px;
     text-align: center;
     position: relative;
@@ -442,6 +442,10 @@ body {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     transform: translateY(20px);
     transition: transform 0.3s;
+    max-height: 90vh;
+    /* Maximum height 90% of screen */
+    overflow-y: auto;
+    /* Enable scroll if needed */
 }
 
 .modal:not(.hidden) .modal-content {
@@ -506,6 +510,31 @@ body {
 .mp-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 158, 227, 0.4);
+}
+
+.small-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 5px 0 10px 0;
+}
+
+.whatsapp-btn {
+    display: block;
+    width: 100%;
+    background: #25D366;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 10px 0 20px 0;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
 .manual-activation {
